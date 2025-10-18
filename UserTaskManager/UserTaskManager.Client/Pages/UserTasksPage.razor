@@ -1,0 +1,67 @@
+@page "/tasks"
+@using UserTaskManager.Client.Services
+@using UserTaskManager.Model
+@inject MyUserTaskService UserTaskManager
+@rendermode InteractiveWebAssembly
+
+<MudText Typo="Typo.h2" Style="font-weight: bold" Align="Align.Center">Добро пожаловать в менеджера ваших задач</MudText>
+<MudSlider Step="50" Max="650" Value="@value">что?</MudSlider>
+
+
+<div style="display: flex; align-items: center; justify-content: center; padding: 20px">
+    @if (_userTasks == null)
+    {
+    <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+    }
+    else
+    {
+    <MudStack Row="true" Style="display: flex; flex-direction: row; flex-wrap: wrap">
+        @*@foreach (var task in _userTasks!)
+        {
+        <MudCard Style=@($"width:{value}px; padding:16px")>
+            <MudCardContent>
+                <MudText>@task.Name</MudText>
+                <MudText Typo="Typo.body2">@task.Description</MudText>
+                <MudRating SelectedValue="@(task.Priority ?? 0)"/>
+            </MudCardContent>
+            <MudCardActions>
+                <MudToolBar>
+                    <MudIconButton Icon="@Icons.Material.Outlined.Edit" />
+                    <MudIconButton Icon="@Icons.Material.Outlined.Remove" />
+                    <MudIconButton Icon="@Icons.Material.Outlined.MoreVert" Color="Color.Inherit" />
+                </MudToolBar>
+            </MudCardActions>
+        </MudCard>
+        }*@
+        @for (int i = 0; i < 7; i++)@*отображается на сайте*@
+        {
+        <MudCard Style=@($"width:{value}px; padding:16px")> 
+            <MudCardContent>
+                <MudText>Имя карточки</MudText>
+                <MudText Style="word-break:normal" Typo="Typo.body2">Описание описаниеописаниео писаниеописа ниеописаниеопис аниеописани еописани еописаниеоп исаниеописаниеопи сание описание</MudText>
+                <MudRating SelectedValue="2"/>
+            </MudCardContent>
+            <MudCardActions>
+                <MudToolBar>
+                    <MudIconButton Icon="@Icons.Material.Outlined.Edit" />
+                    <MudIconButton Icon="@Icons.Material.Outlined.Remove" />
+                    <MudIconButton Icon="@Icons.Material.Outlined.MoreVert" Color="Color.Inherit" />
+                </MudToolBar>
+            </MudCardActions>
+        </MudCard>
+        }
+    </MudStack>
+    }
+</div>
+
+
+@code {
+    private List<UserTask>? _userTasks { get; set; }
+    private int quantity { get; set; } = 10;
+    double value = 350;
+
+    protected override void OnInitialized()
+    {
+        _userTasks = UserTaskManager.GetUserTasks(quantity);
+    }
+}
