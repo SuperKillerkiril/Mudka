@@ -2,7 +2,6 @@
 @using UserTaskManager.Client.Services
 @using UserTaskManager.Model
 @inject MyUserTaskService UserTaskManager
-@rendermode InteractiveWebAssembly
 
 <MudText Typo="Typo.h2" Style="font-weight: bold" Align="Align.Center">Добро пожаловать в менеджера ваших задач</MudText>
 <MudSlider Step="50" Max="650" Value="@value">что?</MudSlider>
@@ -16,7 +15,7 @@
     else
     {
     <MudStack Row="true" Style="display: flex; flex-direction: row; flex-wrap: wrap">
-        @*@foreach (var task in _userTasks!)
+        @foreach (var task in _userTasks!)
         {
         <MudCard Style=@($"width:{value}px; padding:16px")>
             <MudCardContent>
@@ -26,16 +25,16 @@
             </MudCardContent>
             <MudCardActions>
                 <MudToolBar>
-                    <MudIconButton Icon="@Icons.Material.Outlined.Edit" />
-                    <MudIconButton Icon="@Icons.Material.Outlined.Remove" />
-                    <MudIconButton Icon="@Icons.Material.Outlined.MoreVert" Color="Color.Inherit" />
+                    <MudIconButton Icon="@Icons.Material.Outlined.MoreVert" Color="Color.Inherit"/>
+                    <MudIconButton Icon="@Icons.Material.Outlined.Remove"/>
+                    <MudIconButton Icon="@Icons.Material.Outlined.Edit"/>
                 </MudToolBar>
             </MudCardActions>
         </MudCard>
-        }*@
-        @for (int i = 0; i < 7; i++)@*отображается на сайте*@
+        }
+        @for (int i = 0; i < 7; i++)
         {
-        <MudCard Style=@($"width:{value}px; padding:16px")> 
+        <MudCard Style=@($"width:{value}px; padding:16px")> @*тестовая*@
             <MudCardContent>
                 <MudText>Имя карточки</MudText>
                 <MudText Style="word-break:normal" Typo="Typo.body2">Описание описаниеописаниео писаниеописа ниеописаниеопис аниеописани еописани еописаниеоп исаниеописаниеопи сание описание</MudText>
@@ -43,9 +42,9 @@
             </MudCardContent>
             <MudCardActions>
                 <MudToolBar>
-                    <MudIconButton Icon="@Icons.Material.Outlined.Edit" />
-                    <MudIconButton Icon="@Icons.Material.Outlined.Remove" />
-                    <MudIconButton Icon="@Icons.Material.Outlined.MoreVert" Color="Color.Inherit" />
+                    <MudIconButton Icon="@Icons.Material.Outlined.MoreVert" Color="Color.Inherit"/>
+                    <MudIconButton Icon="@Icons.Material.Outlined.Remove"/>
+                    <MudIconButton Icon="@Icons.Material.Outlined.Edit"/>
                 </MudToolBar>
             </MudCardActions>
         </MudCard>
