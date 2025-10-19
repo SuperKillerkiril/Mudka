@@ -5,6 +5,6 @@ using UserTaskManager.Client.Services;
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 
 builder.Services.AddMudServices();
-builder.Services.AddScoped<MyUserTaskService>();
+builder.Services.AddScoped<NoteService>();
 
 await builder.Build().RunAsync();

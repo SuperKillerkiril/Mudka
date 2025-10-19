@@ -1,7 +1,7 @@
-@page "/usertask/edit/{id}"
+@page "/note/edit/{id}"
+@using UserTaskManager.Client.Model
 @using UserTaskManager.Client.Services
-@using UserTaskManager.Model
-@inject MyUserTaskService UserTaskService
+@inject NoteService UserTaskService
 @inject ISnackbar Snackbar
 
 <div style="display: flex; align-items: center; justify-content: center; padding: 20px">
@@ -47,11 +47,11 @@
     private bool _alert;
     private string? _alertText;
 
-    private UserTask? task;
+    private Note? task;
 
     protected override async Task OnInitializedAsync()
     {
-        task = UserTaskService.GetUserTaskById(id);
+        task = UserTaskService.GetUserNoteById(id);
     }
 
     private async Task SaveChange()

@@ -1,13 +1,13 @@
 using System.ComponentModel.DataAnnotations;
-using Color = UserTaskManager.Enum.Color;
+using Color = UserTaskManager.Client.Enum.Color;
 
-namespace UserTaskManager.Model;
+namespace UserTaskManager.Client.Model;
 
-public class UserTask
+public class Note
 {
     [Key] public string Id { get; set; } = Guid.NewGuid().ToString();
     public string? Name { get; set; }
     public int Priority { get; set; }
     public string? Description { get; set; }
-    public Color TaskColor { get; set; }
+    public Color Color { get; set; }
 }

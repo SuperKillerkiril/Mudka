@@ -1,11 +1,13 @@
-@page "/tasks"
+@page "/note"
+@using UserTaskManager.Client.Model
 @using UserTaskManager.Client.Services
-@using UserTaskManager.Model
 @inject NavigationManager NavigationManager
-@inject MyUserTaskService UserTaskManager
+@inject NoteService UserTaskManager
 
 <MudText Typo="Typo.h2" Style="font-weight: bold" Align="Align.Center">Добро пожаловать в менеджера ваших задач</MudText>
 <MudSlider @bind-Value="_cartWight" Min="200" Step="50" Max="650" Label="Ширина заметки"/>
+<MudText Typo="Typo.h6" Style="font-weight: bold" Align="Align.Center">Размер карточки</MudText>
+
 
 
 <div style="display: flex; align-items: center; justify-content: center; padding: 20px">
@@ -22,7 +24,7 @@
             <MudCardContent>
                 <MudText>@task.Name</MudText>
                 <MudText Typo="Typo.body2">@task.Description</MudText>
-                <MudRating SelectedValue="@task.Priority"/>
+                <MudRating SelectedValue="@task.Priority"/> 
             </MudCardContent>
             <MudCardActions>
                 <MudToolBar>
@@ -44,7 +46,7 @@
 
 
 @code {
-    private List<UserTask>? _userTasks { get; set; }
+    private List<Note>? _userTasks { get; set; }
     private int quantity { get; set; } = 10;
     private int _cartWight = 350;
 
@@ -55,6 +57,6 @@
 
     private void GoEdiTask(string id)
     {
-        NavigationManager.NavigateTo($"/edit/{id}");
+        NavigationManager.NavigateTo($"/note/edit/{id}");
     }
 }
