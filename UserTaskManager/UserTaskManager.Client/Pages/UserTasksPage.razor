@@ -1,10 +1,11 @@
 @page "/tasks"
 @using UserTaskManager.Client.Services
 @using UserTaskManager.Model
+@inject NavigationManager NavigationManager
 @inject MyUserTaskService UserTaskManager
 
 <MudText Typo="Typo.h2" Style="font-weight: bold" Align="Align.Center">Добро пожаловать в менеджера ваших задач</MudText>
-<MudSlider Step="50" Max="650" Value="@value">что?</MudSlider>
+<MudSlider @bind-Value="_cartWight" Min="200" Step="50" Max="650" Label="Ширина заметки"/>
 
 
 <div style="display: flex; align-items: center; justify-content: center; padding: 20px">
@@ -17,34 +18,22 @@
     <MudStack Row="true" Style="display: flex; flex-direction: row; flex-wrap: wrap">
         @foreach (var task in _userTasks!)
         {
-        <MudCard Style=@($"width:{value}px; padding:16px")>
+        <MudCard Style=@($"width:{_cartWight}px; padding:16px")>
             <MudCardContent>
                 <MudText>@task.Name</MudText>
                 <MudText Typo="Typo.body2">@task.Description</MudText>
-                <MudRating SelectedValue="@(task.Priority ?? 0)"/>
+                <MudRating SelectedValue="@task.Priority"/>
             </MudCardContent>
             <MudCardActions>
                 <MudToolBar>
-                    <MudIconButton Icon="@Icons.Material.Outlined.MoreVert" Color="Color.Inherit"/>
-                    <MudIconButton Icon="@Icons.Material.Outlined.Remove"/>
-                    <MudIconButton Icon="@Icons.Material.Outlined.Edit"/>
-                </MudToolBar>
-            </MudCardActions>
-        </MudCard>
-        }
-        @for (int i = 0; i < 7; i++)
-        {
-        <MudCard Style=@($"width:{value}px; padding:16px")> @*тестовая*@
-            <MudCardContent>
-                <MudText>Имя карточки</MudText>
-                <MudText Style="word-break:normal" Typo="Typo.body2">Описание описаниеописаниео писаниеописа ниеописаниеопис аниеописани еописани еописаниеоп исаниеописаниеопи сание описание</MudText>
-                <MudRating SelectedValue="2"/>
-            </MudCardContent>
-            <MudCardActions>
-                <MudToolBar>
-                    <MudIconButton Icon="@Icons.Material.Outlined.MoreVert" Color="Color.Inherit"/>
-                    <MudIconButton Icon="@Icons.Material.Outlined.Remove"/>
-                    <MudIconButton Icon="@Icons.Material.Outlined.Edit"/>
+                    <MudIconButton OnClick="()=>GoEdiTask(task.Id)" Icon="@Icons.Material.Outlined.MoreVert" Color="Color.Inherit"/>
+                    <MudIconButton OnClick="()=>UserTaskManager.RemoveUserTaskById(task.Id)" Icon="@Icons.Material.Outlined.Remove"/>
+                    <MudMenu Icon="@Icons.Material.Filled.MoreVert"
+                             AriaLabel="Open user menu">
+                        <MudMenuItem Label="Добавить в избранное" />
+                        <MudMenuItem Label="Скопировать данные" />
+                        <MudMenuItem Label="Добавить в доску" />
+                    </MudMenu>
                 </MudToolBar>
             </MudCardActions>
         </MudCard>
@@ -57,10 +46,15 @@
 @code {
     private List<UserTask>? _userTasks { get; set; }
     private int quantity { get; set; } = 10;
-    double value = 350;
+    private int _cartWight = 350;
 
     protected override void OnInitialized()
     {
-        _userTasks = UserTaskManager.GetUserTasks(quantity);
+        _userTasks = UserTaskManager.GetAllUserTasks(quantity);
+    }
+
+    private void GoEdiTask(string id)
+    {
+        NavigationManager.NavigateTo($"/edit/{id}");
     }
 }

@@ -1,0 +1,70 @@
+@page "/usertask/edit/{id}"
+@using UserTaskManager.Client.Services
+@using UserTaskManager.Model
+@inject MyUserTaskService UserTaskService
+@inject ISnackbar Snackbar
+
+<div style="display: flex; align-items: center; justify-content: center; padding: 20px">
+    @if (task == null)
+    {
+        <MudProgressCircular Color="Color.Default" Indeterminate="true"/>
+    }
+    else
+    {
+        <MudText Typo="Typo.h2" Style="font-weight: bold" Align="Align.Center">Что то хотел поменять в заметке?</MudText>
+        <MudText Typo="Typo.h3" Style="font-weight: bold" Align="Align.Center">@task.Name</MudText>
+        <MudCard>
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h3">Полное название: @task.Name</MudText>
+                </CardHeaderContent>
+                <CardHeaderActions>
+                    <MudMenu Icon="@Icons.Material.Outlined.Edit"
+                             AriaLabel="Отредактировать название">
+                        <MudMenuItem>
+                            <MudTextField @bind-Value="task.Name" Label="Standard" Variant="Variant.Text"></MudTextField>
+                        </MudMenuItem>
+                    </MudMenu>
+                </CardHeaderActions>
+            </MudCardHeader>
+        </MudCard>
+        <MudButton OnClick="SaveChange" Variant="Variant.Filled" Color="Color.Primary">Сохранить изменения</MudButton>
+        @if (_alert)
+        {
+            <MudAlert Severity="Severity.Error">@_alertText</MudAlert>
+        }
+    }
+</div>
+
+
+
+
+@code {
+    [Parameter]
+    public string id { get; set; }
+    
+
+    private bool _alert;
+    private string? _alertText;
+
+    private UserTask? task;
+
+    protected override async Task OnInitializedAsync()
+    {
+        task = UserTaskService.GetUserTaskById(id);
+    }
+
+    private async Task SaveChange()
+    {
+        if (task != null) UserTaskService.RedactUserTaskById(task);
+        else
+        {
+            _alertText = "Че то не то";
+            _alert = true;
+            StateHasChanged(); // Обновление UI
+            await Task.Delay(3000); // 3 секунды
+            _alert = false;
+            StateHasChanged(); // Обновление UI
+        }
+    }
+}

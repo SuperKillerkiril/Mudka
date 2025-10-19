@@ -1,0 +1,34 @@
+@page "/addnewusertask"
+@using UserTaskManager.Client.Services
+@using UserTaskManager.Model
+@inject MyUserTaskService UserTaskManager
+
+
+<MudText Typo="Typo.h2" Style="font-weight: bold" Align="Align.Center">Создание новой заметки</MudText>
+
+<MudTextField T="string" Label="Имя заметки" Variant="Variant.Text" Text="@_userTask.Name" MaxLength="100" AutoGrow HelperText="Не больше 100 символов" />
+<MudTextField T="string" Label="Описание" Variant="Variant.Text" Text="@_userTask.Description" MaxLength="1000" AutoGrow HelperText="Не больше 1000 символов" />
+<MudText Typo="Typo.h4">Важность задачи</MudText>
+<MudRating MaxValue="5" SelectedValue="_userTask.Priority" Color="Color.Primary" Size="Size.Large"/>
+<MudSelect T="UserTaskManager.Enum.Color" Label="Выберете цвет" @bind-Value="_userTask.TaskColor">
+    @foreach (var color in Enum.GetValues(typeof(UserTaskManager.Enum.Color)).Cast<UserTaskManager.Enum.Color>())
+    {
+        <MudSelectItem Value="@color">@color</MudSelectItem>
+    }
+
+</MudSelect>
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveTask" Class="mt-4">
+    Сохранить
+</MudButton>
+
+
+
+@code {
+    private UserTask _userTask;
+
+
+    private void SaveTask()
+    { 
+        UserTaskManager.AddUserTask(_userTask);
+    }
+}
