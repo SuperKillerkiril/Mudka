@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
-using Color = UserTaskManager.Client.Enum.Color;
+using MudBlazor;
 
-namespace UserTaskManager.Client.Model;
+namespace Services.Model;
 
 public class Note
 {

@@ -8,6 +8,7 @@
 
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Services\Services.csproj" />
         <ProjectReference Include="..\UserTaskManager.Client\UserTaskManager.Client.csproj"/>
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.*"/>
     </ItemGroup>

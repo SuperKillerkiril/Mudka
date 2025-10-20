@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTaskManager", "UserTask
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTaskManager.Client", "UserTaskManager\UserTaskManager.Client\UserTaskManager.Client.csproj", "{39027F6E-3E0D-4061-B6A1-23BD37AF9B56}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{220C8955-E942-4373-BB52-E40F6465C66B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{39027F6E-3E0D-4061-B6A1-23BD37AF9B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39027F6E-3E0D-4061-B6A1-23BD37AF9B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39027F6E-3E0D-4061-B6A1-23BD37AF9B56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{220C8955-E942-4373-BB52-E40F6465C66B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{220C8955-E942-4373-BB52-E40F6465C66B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{220C8955-E942-4373-BB52-E40F6465C66B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{220C8955-E942-4373-BB52-E40F6465C66B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

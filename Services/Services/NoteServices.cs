@@ -1,6 +1,6 @@
-using UserTaskManager.Client.Model;
+using Services.Model;
 
-namespace UserTaskManager.Client.Services;
+namespace Services.Services;
 
 public class NoteService
 {

@@ -1,4 +1,5 @@
 using MudBlazor.Services;
+using Services.Services;
 using UserTaskManager.Client.Pages;
 using UserTaskManager.Components;
 
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add MudBlazor services
 builder.Services.AddMudServices();
+builder.Services.AddScoped<NoteService>();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()

@@ -1,6 +1,6 @@
 @page "/add-note"
-@using UserTaskManager.Client.Model
-@using UserTaskManager.Client.Services
+@using Services.Model
+@using Services.Services
 @inject NoteService NoteService
 
 
@@ -10,8 +10,8 @@
 <MudTextField T="string" Label="Описание" Variant="Variant.Text" Text="@_note.Description" MaxLength="1000" AutoGrow HelperText="Не больше 1000 символов" />
 <MudText Typo="Typo.h4">Важность задачи</MudText>
 <MudRating MaxValue="5" SelectedValue="_note.Priority" Color="Color.Primary" Size="Size.Large"/>
-<MudSelect T="Client.Enum.Color" Label="Выберете цвет" @bind-Value="_note.Color">
-    @foreach (var color in Enum.GetValues(typeof(Client.Enum.Color)).Cast<Client.Enum.Color>())
+<MudSelect T="Color" Label="Выберете цвет" @bind-Value="_note.Color">
+    @foreach (var color in Enum.GetValues(typeof(Color)).Cast<Color>())
     {
         <MudSelectItem Value="@color">@color</MudSelectItem>
     }
@@ -24,7 +24,7 @@
 
 
 @code {
-    private Note _note;
+    private Note _note = new Note();
 
 
     private void SaveTask()
