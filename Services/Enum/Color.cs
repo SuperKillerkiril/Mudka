@@ -1,4 +1,4 @@
-namespace UserTaskManager.Client.Enum;
+namespace Services.Enum;
 
 public enum Color
 {
